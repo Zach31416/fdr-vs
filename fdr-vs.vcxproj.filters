@@ -44,9 +44,6 @@
     <QtMoc Include="note.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="remote.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="rulesmenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -54,6 +51,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="songmenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="remote.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -74,6 +74,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\serial\SerialPort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -123,13 +129,16 @@
     <ClCompile Include="song.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="songmenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="timestamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\serial\SerialPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="songmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

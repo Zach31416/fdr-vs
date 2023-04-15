@@ -9,6 +9,7 @@
 #include "qscreen.h"
 #include "mainmenu.h"
 #include "gamescene.h"
+#include "remote.h"
 
 
 // QString songNames[10] = {
@@ -27,6 +28,7 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
 
+  Remote* remote = new Remote(&a);
 
   // Get a list of the connected screens
   QList<QScreen*> screens = QGuiApplication::screens();
