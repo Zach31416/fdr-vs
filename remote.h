@@ -2,7 +2,7 @@
 #define REMOTE_H
 
 #include <QObject>
-#include <QApplication>
+#include <QGraphicsView>
 #include <QKeyEvent>
 #include <array>
 
@@ -24,15 +24,15 @@ class QTimer;
 class Remote :public QObject {
 	Q_OBJECT
 	public:
-		Remote(QApplication* app, int baud=115200, std::string com="com3");
+		Remote(QGraphicsView* view, int baud=115200, std::string com="com3");
 		~Remote();
 	private:
-		QApplication* app;
+		QGraphicsView* view;
 		SerialPort* port;
 		QTimer* clock;
 		void checkArduino();
-		std::array<bool, 5> fretStates;
-		std::array<bool, 2> strumStates;
+		std::array<int, 5> fretStates;
+		std::array<int, 2> strumStates;
 		int joyState;
 		int shakeState;
 		int muonState;
