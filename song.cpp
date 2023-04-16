@@ -306,6 +306,8 @@ void Song::play(int difficulty){
   bargraphState = 0;
   currentStreak = 0;
   maxStreak = 0;
+  currentMultiplier = 0;
+  streakReady = false;
   correctlyPlayedNotes = 0;
   // for (int i=0;i<5;i++) scoreTab[i] =0;
   // Initialise the checking timer
@@ -330,6 +332,17 @@ void Song::spawnHandler(){
     currentDifficulty->at(currentSpawnChord++).spawn(scene);
   }
 }
+
+void Song::shake() {
+    if (streakReady) {
+        QTimer* onStreak = new QTimer();
+        onStreak->setInterval(10000); // 10 second boost
+        onStreak->setSingleShot(true);
+
+    }
+}
+
+void Song::shakeEnd(QTimer* clock) {}
 
 // Updates the scoring system for each note
 void Song::scoreHandler(){

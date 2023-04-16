@@ -132,11 +132,6 @@ void GameScene::keyPressEvent(QKeyEvent *event){
       chord->spawn(this);
       break;
     }
-    // case Qt::Key_Return : { // Spawn a short chord
-      // Chord* chord = new Chord(0,0,fretStates);
-      // chord->spawn(this);
-      // break;
-    // }
     case Qt::Key_Return : { // Emulates strumming
       song->strum();
       break;

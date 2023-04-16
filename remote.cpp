@@ -40,10 +40,12 @@ void Remote::checkArduino() {
 	};
 	Qt::Key joyKeys[2] = { Qt::Key_Z, Qt::Key_X };
 	Qt::Key strumKey = Qt::Key_Return;
+	Qt::Key shakeKey = Qt::Key_Space;
 	// Labels for the keyboard values of those elements
 	QString fretLabels[5] = { "A","S","D","F","G" };
 	QString joyLabels[2] = {"Z","X"};
 	QString strumLabel = "\r";
+	QString shakeLabel = " ";
 	// Don't try to check this info if the arduino isn't connected
 	if (!port->isConnected()) return;
 	// Send data to get something back:
@@ -132,12 +134,16 @@ void Remote::checkArduino() {
 			QCoreApplication::postEvent(view, down);
 		}
 	}
-	
-	QString tmp = "{";
-	for (int i = 0;i < 5;i++) {
-		tmp += (newFretStates[i]) ? 'X' : ' ';
-	};
-	tmp += "}";
-	QString buff = QString::fromStdString(strBuffer);
+	// COMPARING SHAKE:
+	if (newShakeState != shakeState) {
+		if (newShakeState == PRESSED) {
+			QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, shakeKey, Qt::NoModifier, shakeLabel);
+			QCoreApplication::postEvent(view, event);
+		} else {
+			QKeyEvent* event = new QKeyEvent(QEvent::KeyRelease, shakeKey, Qt::NoModifier, shakeLabel);
+			QCoreApplication::postEvent(view, event);
+		}
+		shakeState = newShakeState;
+	}
 }
 

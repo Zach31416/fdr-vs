@@ -50,6 +50,8 @@ class Song:public QObject {
     int maxStreak;
     int bargraphState;
     int correctlyPlayedNotes;
+    bool streakReady;
+    int currentMultiplier;
     std::vector<Chord>* currentDifficulty;
     void longCheck(QTimer* clock, uint chordIndex);
     void spawnHandler();
@@ -57,6 +59,7 @@ class Song:public QObject {
     void handleMediaStatusChanged(QMediaPlayer::MediaStatus);
     void tabUpdater(std::array<bool,5> noteStates,int mod);
     void parseInfo();
+    void shakeEnd(QTimer* clock);
     // std::array<int,5> scoreTab;
   public:
     std::vector<Chord> easy;
@@ -68,6 +71,7 @@ class Song:public QObject {
     ~Song();
     // File parsing (and related functions)
     void parseSync();
+    void shake();
     bool parseDifficulty(int difficulty);
     void setSpawnTimings(int difficulty);
     // Misc debugging

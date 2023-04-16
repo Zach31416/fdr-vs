@@ -34,6 +34,10 @@ extern const QString filePaths[SONG_COUNT];
 //#define SCORE_LATE_NOTE    -25 // no notes played by the player
 #define SCORE_SURPLUS_NOTE -10 // note played when none required
 
+#define STREAK_MULT_DURATION 10000 // 10 seconds
+
+#define STREAK_MULT_VALUE 2
+
 // Last recorded state of all the frets
 // TODO: perhaps put this in a separate class only editable by the remote
 extern bool fretStates[5];

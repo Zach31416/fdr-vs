@@ -3,7 +3,7 @@
 
 #include "ui.h"
 
-QString sourcePath = "C:\\Users\\client\\Documents\\Uni\\S2\\projet\\ws_fdr_qt\\fdr";
+QString sourcePath = "C:\\Users\\zpoul\\Music";
 QString songPath = sourcePath+"\\songs\\";
 QString chartfileName = "notes.chart";
 const QString filePaths[SONG_COUNT] = {
