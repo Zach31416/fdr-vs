@@ -6,6 +6,7 @@
 #include <QDebug>
 
 #include "ui.h"
+#include "common.h"
 #include "gamescene.h"
 
 RightBar::RightBar(GameScene* scene) {
@@ -53,9 +54,8 @@ void RightBar::recolorActivePowerup() {
 }
 
 void RightBar::resetBargraph() {
-    //parent need to set bargraphstate to 0;
-
     filledRect->setBrush(QColor(139, 0, 0, 255)); //Dark Red
+    bargraphState = 0;
     setFilledRect(0);
 }
 

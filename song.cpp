@@ -346,6 +346,7 @@ void Song::shake() {
             });
         streakReady = false; // Reset the readiness of the streak
         currentMultiplier *= STREAK_MULT_DURATION; // Update the current score multiplier
+        scene->getRightBar()->recolorActivePowerup();
         // TODO: Change the color of the onscreen bar to blue
         onStreak->start();
     }
@@ -357,6 +358,7 @@ void Song::shakeEnd(QTimer* clock) {
     // set the streakMeter int of the bargraph to zero
     // TODO: set the rectangle size to zero
     // TODO: reset the rectangle color to red
+    scene->getRightBar()->resetBargraph();
     delete clock; // Delete the timer which is no longer needed
 }
 
@@ -458,6 +460,9 @@ void Song::strum() {
             if (currentStreak % STREAK_TO_INCREASE_BARGRAPH == 0 && bargraphState < 10)
             {
                 bargraphState++;
+            }
+            if (bargraphState == 10) {
+                streakReady = true;
             }
             currentScoreChord++;
         }

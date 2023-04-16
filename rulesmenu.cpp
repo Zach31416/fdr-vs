@@ -15,17 +15,17 @@ RulesMenu::RulesMenu(QGraphicsView* view, QObject* parent) {
   setBgGradient(this);
 
   const char* rulesText = R"(
-Le but du jeu consite à frapper les bonnes notes tel qu'elles
+Le but du jeu consiste à frapper les bonnes notes tel qu'elles
 arrivent à l'écran.
 
-Une note est considéré comme frappé si la frette qui lui
-corresponds est pesée au moment où la barre de strumming
+Une note est considérée comme frappée si la frette qui lui
+correspond est pesée au moment où la barre de strumming
 est frappée.
 
-Si une note est longue, des points supplémentaires seront accordé
-si la frette est maintenue pesée jusq'à la fin de la note.
+Si une note est longue, des points supplémentaires seront accordés
+si la frette est maintenue jusqu'à la fin de la note.
 
-Il est possible que plusieurs notes aient à être pesée simultanément.
+Il est possible que plusieurs notes aient à être pesées simultanément.
 Il est donc important de s'assurer que seulement ces frettes là sont pesées
 et qu'aucune autre frette n'est appuyée.
 
