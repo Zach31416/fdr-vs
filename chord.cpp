@@ -94,7 +94,7 @@ void Chord::spawn(GameScene* scene) const{
           new QObject(), // Object linked to groupAnimation to allow self-desctruct
           [=]() {
             groupAnimation->deleteLater(); // free memory used by groupAnimation
-            despawn(); // delete the Chord alongside all of it's notes
+            //despawn(); // delete the Chord alongside all of it's notes
   });
   // Start the animation
   groupAnimation->start();
@@ -167,6 +167,9 @@ Chord& Chord::operator=(const Chord& other) {
         return *this;
     }
     // Copy the non-constant member variables
+    start = other.start;
+    end = other.end;
+    duration = other.duration;
     rushStart = other.rushStart;
     dragStart = other.dragStart;
     rushRelease = other.rushRelease;
@@ -184,4 +187,9 @@ Chord& Chord::operator=(const Chord& other) {
     // }
     // Return a reference to the updated object
     return *this;
+}
+
+int Chord::getNbNotes()
+{
+    return noteNB;
 }
