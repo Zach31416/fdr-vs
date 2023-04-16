@@ -45,6 +45,9 @@ extern bool fretStates[5];
 // TODO: perhaps add this to a Song class where only it can change it's values
 extern bool expectedFretStates[5];
 
+// Represents the number of LED turned on on the bargraph
+extern int bargraphState;
+
 // Converts a unit of time (ms) to a unit of distance (px)
 int msToPx(int duration);
 // Converts a unit of distance (px) to a unit of time (ms)

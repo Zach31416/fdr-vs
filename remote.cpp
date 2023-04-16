@@ -50,7 +50,7 @@ void Remote::checkArduino() {
 	if (!port->isConnected()) return;
 	// Send data to get something back:
 	json snd_json;
-	snd_json["led"] = 3;
+	snd_json["led"] = bargraphState;
 	std::string raw_out = snd_json.dump();
 	port->writeSerialPort(raw_out.c_str(), raw_out.length());
 	// Read raw data from the arduino

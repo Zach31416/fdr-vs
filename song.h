@@ -48,7 +48,6 @@ class Song:public QObject {
     int highscore;
     int currentStreak;
     int maxStreak;
-    int bargraphState;
     int correctlyPlayedNotes;
     bool streakReady;
     int currentMultiplier;
