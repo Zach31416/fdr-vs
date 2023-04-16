@@ -93,12 +93,7 @@ void GameScene::keyPressEvent(QKeyEvent *event){
   // How to handle different keys:
   switch (event->key()) {
     case Qt::Key_Space : { // Space sets random fret button states
-      qDebug() << "SpaceBar was pressed";
-      QRandomGenerator generator(QDateTime::currentMSecsSinceEpoch());
-      for (int i = 0; i < 5; i++) {
-        fretStates[i] = generator.bounded(2);
-      }
-      recolor(fretStates);
+      song->shake();
       break;
     }
     // ASDFG are used to simulate the remote's frets while debugging

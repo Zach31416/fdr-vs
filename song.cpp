@@ -335,16 +335,30 @@ void Song::spawnHandler() {
     }
 }
 
+// Executes when a streak multiplier is activated:
 void Song::shake() {
     if (streakReady) {
-        QTimer* onStreak = new QTimer();
-        onStreak->setInterval(10000); // 10 second boost
-        onStreak->setSingleShot(true);
-
+        QTimer* onStreak = new QTimer(); // Create a timer
+        onStreak->setInterval(STREAK_MULT_DURATION); // set it's duration
+        onStreak->setSingleShot(true); // set it to only fire once 
+        connect(onStreak, &QTimer::timeout, this, [=]() {
+            shakeEnd(onStreak); // connect the shakeEnd method to the end of the timer
+            });
+        streakReady = false; // Reset the readiness of the streak
+        currentMultiplier *= STREAK_MULT_DURATION; // Update the current score multiplier
+        // TODO: Change the color of the onscreen bar to blue
+        onStreak->start();
     }
 }
 
-void Song::shakeEnd(QTimer* clock) {}
+// Executes when a streak multiplier finishes:
+void Song::shakeEnd(QTimer* clock) {
+    currentMultiplier /= STREAK_MULT_VALUE; // Revert the multiplier value
+    // set the streakMeter int of the bargraph to zero
+    // TODO: set the rectangle size to zero
+    // TODO: reset the rectangle color to red
+    delete clock; // Delete the timer which is no longer needed
+}
 
 // Updates the scoring system for each note
 void Song::scoreHandler() {
