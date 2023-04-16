@@ -3,7 +3,7 @@
 
 #include "ui.h"
 
-QString sourcePath = "C:\\Users\\zpoul\\Music";
+QString sourcePath = "C:\\Users\\client\\Documents\\Uni\\S2\\projet\\ws_fdr_qt\\fdr";
 QString songPath = sourcePath+"\\songs\\";
 QString chartfileName = "notes.chart";
 const QString filePaths[SONG_COUNT] = {
@@ -23,6 +23,8 @@ bool fretStates[5] = {0};
 // This is accessible to everyone but as chords reach certain thresholds,
 // they will change these values.
 bool expectedFretStates[5] = {0};
+
+int bargraphState = 0;
 
 // Converts a unit of time (ms) to a unit of distance (px)
 // This works because everything moves at a constant speed
