@@ -19,6 +19,9 @@ RightBar::RightBar(GameScene* scene) {
     streak = new QGraphicsTextItem("Notes de suite: 0");
     streak->setDefaultTextColor(TEXT_COLOR_MAIN);
     streak->setFont(QFont("Arial", 32));
+    multiplier = new QGraphicsTextItem("x1");
+    multiplier->setDefaultTextColor(TEXT_COLOR_MAIN);
+    multiplier->setFont(QFont("Arial", 32));
 
     backgroundRect = new QGraphicsRectItem();
     backgroundRect->setBrush(TEXT_COLOR_MAIN);
@@ -42,7 +45,7 @@ void RightBar::setFilledRect(int ledstate) {
     const int xPos = scene->getFret(4)->scenePos().x() +
         scene->getFret(4)->rect().width() +
         TEXT_SIDE_PADDING;
-    filledRect->setRect(xPos, streak->pos().y() + streak->boundingRect().height() + TEXT_MARGIN_Y, 200, (BARGRAPH_HEIGHT / 10) * ledstate);
+    filledRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, 200, (BARGRAPH_HEIGHT / 10) * ledstate);
 }
 
 void RightBar::recolorFullBargraph() {
@@ -59,6 +62,22 @@ void RightBar::resetBargraph() {
     setFilledRect(0);
 }
 
+void RightBar::setMultiplier(const int currentMultiplier, bool isPowerup, bool isDivineIntervention) {
+    QString multiplierDesc = "";
+    if (isPowerup && isDivineIntervention) {
+        multiplierDesc = "POWERUP ET INTERVENTION DIVINE !!!";
+    }
+    else if (isPowerup)
+    {
+        multiplierDesc = "POWERUP !!!";
+    }
+    else if (isDivineIntervention)
+    {
+        multiplierDesc = "INTERVENTION DIVINE !!!";
+    }
+    this->multiplier->setPlainText("x" + QString::number(currentMultiplier) + " : " + multiplierDesc);
+}
+
 void RightBar::place() {
     const int xPos = scene->getFret(4)->scenePos().x() +
         scene->getFret(4)->rect().width() +
@@ -69,8 +88,12 @@ void RightBar::place() {
     streak->setPos(xPos, score->pos().y() + score->boundingRect().height() + TEXT_MARGIN_Y);
     scene->addItem(streak);
 
-    backgroundRect->setRect(xPos, streak->pos().y() + streak->boundingRect().height() + TEXT_MARGIN_Y, 200, BARGRAPH_HEIGHT);
+    multiplier->setPos(xPos, streak->pos().y() +
+        streak->boundingRect().height() + TEXT_MARGIN_Y);
+    scene->addItem(multiplier);
+
+    backgroundRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, 200, BARGRAPH_HEIGHT);
     scene->addItem(backgroundRect);
-    filledRect->setRect(xPos, streak->pos().y() + streak->boundingRect().height() + TEXT_MARGIN_Y, 200, 1);
+    filledRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, 200, 1);
     scene->addItem(filledRect);
 }

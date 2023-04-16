@@ -11,6 +11,7 @@ class RightBar {
 private:
     QGraphicsTextItem* score;
     QGraphicsTextItem* streak;
+    QGraphicsTextItem* multiplier;
     QGraphicsRectItem* backgroundRect;
     QGraphicsRectItem* filledRect;
     GameScene* scene;
@@ -19,6 +20,7 @@ public:
     ~RightBar();
     void setScore(const int score);
     void setStreak(const int streak);
+    void setMultiplier(const int currentMultiplier, bool isPowerup, bool isDivineIntervention);
     void setFilledRect(int ledstate);
     void recolorFullBargraph();
     void recolorActivePowerup();

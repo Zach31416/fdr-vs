@@ -81,6 +81,7 @@ void Remote::checkArduino() {
 			}
 			// Assign Joystick value
 			newJoyState = std::stoi(match[8].str());
+			qDebug() << newJoyState;
 			// Assign Shake value
 			newShakeState = std::stoi(match[9].str());
 			// Assign Muon state
@@ -118,7 +119,7 @@ void Remote::checkArduino() {
 			strumStates[i] = newStrumStates[i];
 		}
 	}
-	// COMPARING JOYSTICK:
+	 //COMPARING JOYSTICK:
 	if (newJoyState != joyState) {
 		if (newJoyState == 3) { // Up was pressed (down is 4)
 			QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, joyKeys[0], Qt::NoModifier, joyLabels[0]);

@@ -308,9 +308,11 @@ void Song::play(int difficulty){
   bargraphState = 0;
   currentStreak = 0;
   maxStreak = 0;
-  currentMultiplier = 0;
+  currentMultiplier = 1;
   streakReady = false;
   correctlyPlayedNotes = 0;
+  activePowerup = false;
+  activeDivineIntervention = false;
   // for (int i=0;i<5;i++) scoreTab[i] =0;
   // Initialise the checking timer
   clock = new QTimer(this);
@@ -338,6 +340,7 @@ void Song::spawnHandler() {
 // Executes when a streak multiplier is activated:
 void Song::shake() {
     if (streakReady) {
+        activePowerup = true;
         QTimer* onStreak = new QTimer(); // Create a timer
         onStreak->setInterval(STREAK_MULT_DURATION); // set it's duration
         onStreak->setSingleShot(true); // set it to only fire once 
@@ -345,8 +348,10 @@ void Song::shake() {
             shakeEnd(onStreak); // connect the shakeEnd method to the end of the timer
             });
         streakReady = false; // Reset the readiness of the streak
-        currentMultiplier *= STREAK_MULT_DURATION; // Update the current score multiplier
+        bargraphState = 0;
+        currentMultiplier *= STREAK_MULT_VALUE; // Update the current score multiplier
         scene->getRightBar()->recolorActivePowerup();
+        scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
         // TODO: Change the color of the onscreen bar to blue
         onStreak->start();
     }
@@ -359,6 +364,9 @@ void Song::shakeEnd(QTimer* clock) {
     // TODO: set the rectangle size to zero
     // TODO: reset the rectangle color to red
     scene->getRightBar()->resetBargraph();
+    activePowerup = false;
+    streakReady = false;
+    scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
     delete clock; // Delete the timer which is no longer needed
 }
 
@@ -439,7 +447,7 @@ void Song::strum() {
         }
         if (noteCorrectlyPlayed)
         {
-            chordScore = SCORE_GOOD_NOTE * currentChord->getNbNotes();
+            chordScore = SCORE_GOOD_NOTE * currentChord->getNbNotes() * currentMultiplier;
             if (currentChord->getDuration() != 0)
             {
                 qDebug() << QString::number(currentChord->getDuration());
@@ -457,7 +465,7 @@ void Song::strum() {
             {
                 maxStreak = currentStreak;
             }
-            if (currentStreak % STREAK_TO_INCREASE_BARGRAPH == 0 && bargraphState < 10)
+            if ((currentStreak % STREAK_TO_INCREASE_BARGRAPH == 0) && (bargraphState < 10) && (!activePowerup))
             {
                 bargraphState++;
             }
@@ -502,7 +510,7 @@ void Song::strum() {
     scene->getRightBar()->setScore(highscore);
     scene->getRightBar()->setStreak(currentStreak);
     scene->getRightBar()->setFilledRect(bargraphState);
-    if (bargraphState == 10)
+    if (bargraphState == 10 && !activePowerup)
     {
         scene->getRightBar()->recolorFullBargraph();
     }

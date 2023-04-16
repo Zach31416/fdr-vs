@@ -51,6 +51,8 @@ class Song:public QObject {
     int correctlyPlayedNotes;
     bool streakReady;
     int currentMultiplier;
+    bool activePowerup;
+    bool activeDivineIntervention;
     std::vector<Chord>* currentDifficulty;
     void longCheck(QTimer* clock, uint chordIndex);
     void spawnHandler();
