@@ -15,16 +15,16 @@ InfoMenu::InfoMenu(QGraphicsView* view, QObject* parent) {
   setBgGradient(this);
 
   const char* rulesText = R"(
-Le jeu "Flaming Devillish Relish est un hommage au jeu créé par
+Le jeu "Flaming Devillish Relish" est un hommage au jeu créé par
 RedOctane "Guitar Hero". Sa création fut un exercice technique
-ayant aidé à l'approffondissmenent des connaissances informatiques,
+ayant aidé à l'approfondissmenent des connaissances informatiques,
 mathématiques et électriques des 6 étudiants l'ayant réalisé dans le
-cadre du cours de projet de la deuxième session du bachalauréat à
-l'université de Sherbrooke. Celui-ci a été fait avec la librairie
+cadre du cours de projet de la deuxième session du baccalauréat à
+l'Université de Sherbrooke. Celui-ci a été conçu avec la librairie
 visuelle QT. La totalité du code lié à ce projet demeure sous la
 license LGPL tel que QT le demande pour pouvoir en faire une utilisation
-gratuite. Du fond de notre coeur, nous, les créateur du jeu, vous dites
-merci d'essayer notre jeu.
+gratuite. Du fond de notre coeur, nous, les créateurs du jeu, vous remercions
+d'essayer notre jeu.
 
 - Benjamin C.
 - Brenda T.

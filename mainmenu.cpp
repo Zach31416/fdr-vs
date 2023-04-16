@@ -18,7 +18,7 @@ MainMenu::MainMenu(QGraphicsView* view, QObject* parent) {
   setBgGradient(this);
   // Options for the menu:
   QString elements[] = {
-    "Jouer", "Règlements", "Info", "Quitter"
+    "Jouer", "Règlements", "Infos", "Quitter"
   };
   for (int i=0;i<4;i++ ){
     boutons[i] = new QGraphicsTextItem();
