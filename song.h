@@ -42,6 +42,7 @@ class Song:public QObject {
     void consolidate(int difficulty);
     GameScene* scene;
     QTimer* clock;
+    QTimer* muonClock;
     uint currentSpawnChord;
     uint currentScoreChord;
     bool longNote;
@@ -52,7 +53,8 @@ class Song:public QObject {
     bool streakReady;
     int currentMultiplier;
     bool activePowerup;
-    bool activeDivineIntervention;
+    bool activeDivineIntervention; // resets once the powerup is over
+    bool activeDivineCheck; // Resets after the cooldown
     std::vector<Chord>* currentDifficulty;
     void longCheck(QTimer* clock, uint chordIndex);
     void spawnHandler();
@@ -61,6 +63,9 @@ class Song:public QObject {
     void tabUpdater(std::array<bool,5> noteStates,int mod);
     void parseInfo();
     void shakeEnd(QTimer* clock);
+    void divineStart();
+    void divineEnd(QTimer* clock);
+    void divineCooldownEnd(QTimer* clock);
     // std::array<int,5> scoreTab;
   public:
     std::vector<Chord> easy;

@@ -314,11 +314,21 @@ void Song::play(int difficulty){
   activePowerup = false;
   activeDivineIntervention = false;
   // for (int i=0;i<5;i++) scoreTab[i] =0;
+  // Initialise a timer that checks muons every second
+  muonClock = new QTimer(this);
+  muonClock->setInterval(1000);
+  connect(muonClock, &QTimer::timeout,this,[=](){
+      if (!activeDivineCheck) {
+        if ( (muonNb%100) == 0 ){
+          divineStart();
+        }
+      }
+      })
   // Initialise the checking timer
   clock = new QTimer(this);
   connect(clock, &QTimer::timeout,this,&Song::spawnHandler);
   connect(clock, &QTimer::timeout,this,&Song::scoreHandler);
-  connect(mediaPlayer, 
+  connect(mediaPlayer,
       &QMediaPlayer::mediaStatusChanged,
       this,
       &Song::handleMediaStatusChanged);
@@ -337,13 +347,50 @@ void Song::spawnHandler() {
     }
 }
 
+void Song::divineStart(){
+  currentMultiplier *= STREAK_MULT_VALUE;
+  activeDivineIntervention = true;
+  activeDivineCheck = false; // Stop checking for muons until cooldown end
+  // Start a 10s timer that will end the divine intervention
+  QTimer* divineTimer = new QTimer();
+  divineTimer->setInterval(STREAK_MULT_DURATION);
+  divineTimer->setSingleShot(true);
+  connect(divineTimer, &QTimer::timeout, this, [=]() {
+      divineEnd(divineTimer);
+      });
+  divineTimer->start();
+}
+
+void Song::divineEnd(QTimer* clock){
+  // delete the divine intervention clock to prevent memory leaks
+  delete clock;
+  // Reset the divine intervention
+  activeDivineIntervention = false;
+  currentMultiplier /= STREAK_MULT_VALUE;
+  // Start the cooldown clock
+  cooldownClock = new QTimer();
+  cooldownClock->setInterval(3000);
+  cooldownClock->setSingleShot(true);
+  connect(cooldownClock, &QTimer::timeout, this, [=]() {
+      divineCooldownEnd(cooldownClock);
+      });
+  cooldownClock->start();
+}
+
+void Song::divineCooldownEnd(QTimer* clock){
+  // delete the cooldown clock to prevent memory leaks
+  delete clock;
+  // Reset the cooldown clock
+  activeDivineCheck = true;
+}
+
 // Executes when a streak multiplier is activated:
 void Song::shake() {
     if (streakReady) {
         activePowerup = true;
         QTimer* onStreak = new QTimer(); // Create a timer
         onStreak->setInterval(STREAK_MULT_DURATION); // set it's duration
-        onStreak->setSingleShot(true); // set it to only fire once 
+        onStreak->setSingleShot(true); // set it to only fire once
         connect(onStreak, &QTimer::timeout, this, [=]() {
             shakeEnd(onStreak); // connect the shakeEnd method to the end of the timer
             });

@@ -25,6 +25,7 @@ bool fretStates[5] = {0};
 bool expectedFretStates[5] = {0};
 
 int bargraphState = 0;
+int muonNb = 0;
 
 // Converts a unit of time (ms) to a unit of distance (px)
 // This works because everything moves at a constant speed

@@ -84,8 +84,8 @@ void Remote::checkArduino() {
 			qDebug() << newJoyState;
 			// Assign Shake value
 			newShakeState = std::stoi(match[9].str());
-			// Assign Muon state
-			newMuonState = std::stoi(match[10].str());
+			// Add muons detected by the arduino to the total
+			muonNb += std::stoi(match[10].str());
 		}
 	}
 	// Compare the received data to the previous data (contained in the object)
