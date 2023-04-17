@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 class InfoMenu:public QGraphicsScene {
   Q_OBJECT
@@ -16,6 +17,7 @@ class InfoMenu:public QGraphicsScene {
     QGraphicsTextItem* paragraph;
     QGraphicsTextItem* backButton;
     void select();
+    QMediaPlayer* btnSound;
   protected:
     void keyPressEvent(QKeyEvent* event);
     void keyReleaseEvent(QKeyEvent* event);

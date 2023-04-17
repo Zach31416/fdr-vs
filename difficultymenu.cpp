@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QFont>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 #include "ui.h"
 #include "common.h"
@@ -14,6 +15,9 @@ DifficultyMenu::DifficultyMenu(QGraphicsView* view, Song* song, QObject* parent)
   this->view = view;
   this->song = song;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set the background gradient
   setBgGradient(this);
   // Create the title
@@ -45,6 +49,7 @@ DifficultyMenu::DifficultyMenu(QGraphicsView* view, Song* song, QObject* parent)
 }
 
 DifficultyMenu::~DifficultyMenu(){
+  if (btnSound != NULL) delete btnSound;
   if (title != NULL) delete title;
   for (int i=0;i<5;i++){
     if (boutons[i] != NULL) delete boutons[i];
@@ -52,6 +57,7 @@ DifficultyMenu::~DifficultyMenu(){
 }
 
 void DifficultyMenu::nextElement(){
+  btnSound->play();
   boutonActuel++;
   if (boutonActuel>4){
       boutonActuel=0;
@@ -60,6 +66,7 @@ void DifficultyMenu::nextElement(){
 }
 
 void DifficultyMenu::prevElement(){
+  btnSound->play();
   boutonActuel--;
   if (boutonActuel<0){
       boutonActuel=4;
@@ -68,6 +75,7 @@ void DifficultyMenu::prevElement(){
 }
 
 void DifficultyMenu::select(){
+  btnSound->play();
   // If the back button is selected:
   if (boutonActuel==4){
     view->setScene(new SongMenu(view));

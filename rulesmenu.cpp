@@ -7,10 +7,14 @@
 #include <QFont>
 #include <QKeyEvent>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 RulesMenu::RulesMenu(QGraphicsView* view, QObject* parent) {
   this->view = view;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set background
   setBgGradient(this);
 
@@ -61,6 +65,7 @@ ET DE GARDER LE ROCK VIVANT!
 }
 
 RulesMenu::~RulesMenu(){
+  if (btnSound!=NULL) delete btnSound;
   if (title!=NULL) delete title;
   if (paragraph!=NULL) delete paragraph;
   if (backButton!=NULL) delete backButton;

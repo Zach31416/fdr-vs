@@ -9,10 +9,14 @@
 #include <QColor>
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   this->view = view;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set background
   setBgGradient(this);
 
@@ -59,6 +63,7 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
 }
 
 SongMenu::~SongMenu(){
+  if (btnSound!=NULL) delete btnSound;
   if (title!=NULL) delete title;
   if (desc!=NULL) delete desc;
   // Delete song objects
@@ -95,6 +100,7 @@ void SongMenu::draw(){
 }
 
 void SongMenu::nextElement(){
+  btnSound->play();
   currentSong++;
   if (currentSong > SONG_COUNT){
     currentSong = 0;
@@ -103,6 +109,7 @@ void SongMenu::nextElement(){
 }
 
 void SongMenu::prevElement(){
+  btnSound->play();
   currentSong--;
   if (currentSong<0){
     currentSong = SONG_COUNT;
@@ -111,6 +118,7 @@ void SongMenu::prevElement(){
 }
 
 void SongMenu::select(){
+  btnSound->play();
   // If the back button is selected:
   if (currentSong == SONG_COUNT){
     view->setScene(new MainMenu(view));

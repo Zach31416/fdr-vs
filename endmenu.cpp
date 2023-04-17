@@ -3,6 +3,7 @@
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
 #include <QFont>
+#include <QMediaPlayer>
 
 #include "song.h"
 #include "mainmenu.h"
@@ -13,6 +14,9 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
   this->view = view;
   this->song = song;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set the background gradient
   setBgGradient(this);
   // Setup title
@@ -73,6 +77,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
 }
 
 EndMenu::~EndMenu(){
+  if (  btnSound != NULL) delete btnSound;
   if (     title != NULL) delete title;
   if (percentage != NULL) delete percentage;
   if (nbNotesReussies != NULL) delete nbNotesReussies;

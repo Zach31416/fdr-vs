@@ -13,6 +13,7 @@ extern QString sourcePath;
 extern QString songPath;
 extern QString chartfileName;
 extern const QString filePaths[SONG_COUNT];
+extern QString clickSoundPath;
 
 // Information about motion:
 // This is the only place where time is measured in seconds

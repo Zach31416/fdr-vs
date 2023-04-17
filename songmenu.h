@@ -6,6 +6,7 @@ class Song;
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 #include "common.h"
 
@@ -15,6 +16,7 @@ class SongMenu:public QGraphicsScene{
     explicit SongMenu(QGraphicsView* view, QObject* parent=nullptr);
     ~SongMenu();
   private:
+    QMediaPlayer* btnSound;
     QGraphicsView* view;
     QGraphicsTextItem* songTextList[SONG_COUNT+1];
     Song* songList[SONG_COUNT];

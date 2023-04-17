@@ -10,10 +10,14 @@
 #include <QColor>
 #include <QFont>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 MainMenu::MainMenu(QGraphicsView* view, QObject* parent) {
   this->view = view;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set background
   setBgGradient(this);
   // Options for the menu:
@@ -36,12 +40,14 @@ MainMenu::MainMenu(QGraphicsView* view, QObject* parent) {
 }
 
 MainMenu::~MainMenu(){
+  if (btnSound != NULL) delete btnSound;
   for (int i=0;i<4;i++){
     if (boutons[i] != NULL) delete boutons[i];
   }
 }
 
 void MainMenu::select(){
+  btnSound->play();
   switch (boutonActuel) {
     case 0:
       view->setScene(new SongMenu(view));
@@ -65,6 +71,7 @@ void MainMenu::select(){
 }
 
 void MainMenu::nextElement(){
+  btnSound->play();
   for (int i =0; i<4;i++){
     boutons[i]->setDefaultTextColor(TEXT_COLOR_MENU);
   }
@@ -76,6 +83,7 @@ void MainMenu::nextElement(){
 }
 
 void MainMenu::prevElement(){
+  btnSound->play();
   for (int i =0; i<4;i++){
     boutons[i]->setDefaultTextColor(TEXT_COLOR_MENU);
   }

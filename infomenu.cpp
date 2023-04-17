@@ -7,10 +7,14 @@
 #include <QFont>
 #include <QKeyEvent>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 InfoMenu::InfoMenu(QGraphicsView* view, QObject* parent) {
   this->view = view;
   this->setSceneRect(view->rect());
+  // Create click sound
+  btnSound = new MediaPlayer();
+  btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set background
   setBgGradient(this);
 
@@ -62,12 +66,14 @@ d'essayer notre jeu.
 }
 
 InfoMenu::~InfoMenu(){
+  if (btnSound!=NULL) delete btnSound;
   if (title!=NULL) delete title;
   if (paragraph!=NULL) delete paragraph;
   if (backButton!=NULL) delete backButton;
 }
 
 void InfoMenu::select(){
+  btnSound->play();
   view->setScene(new MainMenu(view));
   delete this;
 }

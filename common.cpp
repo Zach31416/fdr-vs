@@ -19,6 +19,8 @@ songPath+"Symphony-X-Eve-of-Seduction\\"+chartfileName,
 songPath+"Victor-Wooten-and-Steve-Bailey-A-Chick-from-Corea-(Live)\\"+chartfileName
 };
 
+QString clickSoundPath = songPath+"btn-click.wav";
+
 bool fretStates[5] = {0};
 // This is accessible to everyone but as chords reach certain thresholds,
 // they will change these values.

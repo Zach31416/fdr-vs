@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QMediaPlayer>
 
 class Song;
 
@@ -12,6 +13,7 @@ class EndMenu:public QGraphicsScene {
     explicit EndMenu(QGraphicsView* view, Song* song, QObject* parent = nullptr);
     ~EndMenu();
   private:
+    QMediaPlayer* btnSound;
     QGraphicsView* view;
     Song* song;
     QGraphicsTextItem* title;

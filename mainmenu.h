@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 
 class MainMenu:public QGraphicsScene {
@@ -18,6 +19,7 @@ class MainMenu:public QGraphicsScene {
     void nextElement();
     void prevElement();
     void select();
+    QMediaPlayer* btnSound;
   protected:
     void keyPressEvent(QKeyEvent* event);
     void keyReleaseEvent(QKeyEvent* event);

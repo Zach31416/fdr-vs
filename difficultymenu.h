@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
+#include <QMediaPlayer>
 
 class Song;
 
@@ -13,6 +14,7 @@ class DifficultyMenu:public QGraphicsScene {
     explicit DifficultyMenu(QGraphicsView* view, Song* song, QObject* parent=nullptr);
     ~DifficultyMenu();
   private:
+    QMediaPlayer* btnSound;
     QGraphicsView* view;
     int boutonActuel;
     QGraphicsTextItem* title;
