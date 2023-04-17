@@ -317,13 +317,13 @@ void Song::play(int difficulty){
   // Initialise a timer that checks muons every second
   muonClock = new QTimer(this);
   muonClock->setInterval(1000);
-  connect(muonClock, &QTimer::timeout,this,[=](){
+  connect(muonClock, &QTimer::timeout, this, [=]() {
       if (!activeDivineCheck) {
-        if ( (muonNb%100) == 0 ){
-          divineStart();
-        }
+          if ((muonNb % 100) == 0) {
+              divineStart();
+          }
       }
-      })
+      });
   // Initialise the checking timer
   clock = new QTimer(this);
   connect(clock, &QTimer::timeout,this,&Song::spawnHandler);
@@ -368,7 +368,7 @@ void Song::divineEnd(QTimer* clock){
   activeDivineIntervention = false;
   currentMultiplier /= STREAK_MULT_VALUE;
   // Start the cooldown clock
-  cooldownClock = new QTimer();
+  QTimer* cooldownClock = new QTimer();
   cooldownClock->setInterval(3000);
   cooldownClock->setSingleShot(true);
   connect(cooldownClock, &QTimer::timeout, this, [=]() {
