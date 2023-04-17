@@ -557,7 +557,7 @@ void Song::strum() {
     scene->getRightBar()->setStreak(currentStreak);
     if (!activePowerup)
     {
-        scene->getRightBar()->setFilledRect(bargraphState);
+        scene->getRightBar()->fillRects(bargraphState);
     }
     if (bargraphState == 10 && !activePowerup)
     {

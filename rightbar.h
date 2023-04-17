@@ -3,7 +3,11 @@
 
 #include <QGraphicsTextItem>
 
-#define BARGRAPH_HEIGHT 400
+#define BARGRAPH_HEIGHT 310
+#define BARGRAPH_WIDTH 200
+#define LED_HEIGHT 20
+#define LED_WIDTH 180
+
 
 class GameScene;
 
