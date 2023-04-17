@@ -399,7 +399,6 @@ void Song::shake() {
         currentMultiplier *= STREAK_MULT_VALUE; // Update the current score multiplier
         scene->getRightBar()->recolorActivePowerup();
         scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
-        // TODO: Change the color of the onscreen bar to blue
         onStreak->start();
     }
 }
@@ -556,7 +555,10 @@ void Song::strum() {
     highscore += chordScore;
     scene->getRightBar()->setScore(highscore);
     scene->getRightBar()->setStreak(currentStreak);
-    scene->getRightBar()->setFilledRect(bargraphState);
+    if (!activePowerup)
+    {
+        scene->getRightBar()->setFilledRect(bargraphState);
+    }
     if (bargraphState == 10 && !activePowerup)
     {
         scene->getRightBar()->recolorFullBargraph();

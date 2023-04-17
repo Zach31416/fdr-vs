@@ -131,7 +131,7 @@ void SongMenu::keyPressEvent(QKeyEvent* event){
       nextElement();
       break;
     }
-    case Qt::Key_Return :
+    case Qt::Key_A :
       select();
       break;
     default:
