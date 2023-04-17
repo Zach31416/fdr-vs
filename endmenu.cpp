@@ -94,7 +94,7 @@ void EndMenu::select(){
 
 void EndMenu::keyPressEvent(QKeyEvent* event){
   switch (event->key()){
-    case Qt::Key_Return:
+    case Qt::Key_A:
       select();
       break;
     default:

@@ -81,7 +81,6 @@ void Remote::checkArduino() {
 			}
 			// Assign Joystick value
 			newJoyState = std::stoi(match[8].str());
-			qDebug() << newJoyState;
 			// Assign Shake value
 			newShakeState = std::stoi(match[9].str());
 			// Add muons detected by the arduino to the total

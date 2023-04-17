@@ -13,7 +13,10 @@ private:
     QGraphicsTextItem* streak;
     QGraphicsTextItem* multiplier;
     QGraphicsRectItem* backgroundRect;
-    QGraphicsRectItem* filledRect;
+    //QGraphicsRectItem* filledRect;
+
+    QGraphicsRectItem* leds[10];
+
     GameScene* scene;
 public:
     RightBar(GameScene* scene);
@@ -21,7 +24,8 @@ public:
     void setScore(const int score);
     void setStreak(const int streak);
     void setMultiplier(const int currentMultiplier, bool isPowerup, bool isDivineIntervention);
-    void setFilledRect(int ledstate);
+    //void setFilledRect(int ledstate);
+    void fillRects(int ledState);
     void recolorFullBargraph();
     void recolorActivePowerup();
     void resetBargraph();

@@ -25,8 +25,12 @@ RightBar::RightBar(GameScene* scene) {
 
     backgroundRect = new QGraphicsRectItem();
     backgroundRect->setBrush(TEXT_COLOR_MAIN);
-    filledRect = new QGraphicsRectItem();
-    filledRect->setBrush(QColor(139, 0, 0, 255)); //Dark red
+    for (int i = 0; i < 10; i++)
+    {
+        leds[i] = new QGraphicsRectItem
+    }
+    //filledRect = new QGraphicsRectItem();
+    //filledRect->setBrush(QColor(139, 0, 0, 255)); //Dark red
     //backgroundRect->setBrush(QColor(255, 255, 255, 255));
     place();
 }
