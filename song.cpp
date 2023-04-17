@@ -290,7 +290,8 @@ void Song::play(int difficulty){
   leftbar->setTitle(title);
   leftbar->setAlbum(album);
   leftbar->setAuthor(artist);
-  // leftbar->setYear(year);
+  leftbar->setYear(year);
+  leftbar->setCharter(charter);
   // leftbar->setYear(mediaPlayer->LoadedState());
   leftbar->setDifficulty(difficulty);
   // Select the correct difficulty
@@ -313,13 +314,14 @@ void Song::play(int difficulty){
   correctlyPlayedNotes = 0;
   activePowerup = false;
   activeDivineIntervention = false;
+  activeDivineCheck = true;
   // for (int i=0;i<5;i++) scoreTab[i] =0;
   // Initialise a timer that checks muons every second
   muonClock = new QTimer(this);
   muonClock->setInterval(1000);
   connect(muonClock, &QTimer::timeout, this, [=]() {
-      if (!activeDivineCheck) {
-          if ((muonNb % 100) == 0) {
+      if (activeDivineCheck) {
+          if ((muonNb % 2) == 0) {
               divineStart();
           }
       }
@@ -333,6 +335,7 @@ void Song::play(int difficulty){
       this,
       &Song::handleMediaStatusChanged);
   clock->start(1);
+  muonClock->start();
   mediaPlayer->setVolume(50);
   leftbar->setDuration(mediaPlayer->duration());
   mediaPlayer->play();

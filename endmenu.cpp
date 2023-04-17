@@ -15,7 +15,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
   this->song = song;
   this->setSceneRect(view->rect());
   // Create click sound
-  btnSound = new MediaPlayer();
+  btnSound = new QMediaPlayer();
   btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set the background gradient
   setBgGradient(this);

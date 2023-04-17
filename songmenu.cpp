@@ -15,7 +15,7 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   this->view = view;
   this->setSceneRect(view->rect());
   // Create click sound
-  btnSound = new MediaPlayer();
+  btnSound = new QMediaPlayer();
   btnSound->setMedia(QUrl::fromLocalFile(clickSoundPath));
   // Set background
   setBgGradient(this);
