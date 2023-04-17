@@ -50,7 +50,7 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   int yStartList = title->pos().y()+title->boundingRect().height()+TEXT_MARGIN_Y;
   // Configure the elements of the list
   for (int i=0;i<=SONG_COUNT;i++){
-    songTextList[i]->setFont(QFont("Arial",32));
+    songTextList[i]->setFont(QFont("Arial",24));
     songTextList[i]->setPos(TEXT_SIDE_PADDING,
       yStartList+(i*(songTextList[i]->boundingRect().height()+TEXT_MARGIN_Y)));
     this->addItem(songTextList[i]);

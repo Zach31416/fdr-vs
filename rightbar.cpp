@@ -24,11 +24,11 @@ RightBar::RightBar(GameScene* scene) {
     multiplier->setFont(QFont("Arial", 32));
 
     backgroundRect = new QGraphicsRectItem();
-    backgroundRect->setBrush(TEXT_COLOR_MAIN);
+    backgroundRect->setBrush(QColor(255, 255, 255, 128));//White
     for (int i = 0; i < 10; i++)
     {
         leds[i] = new QGraphicsRectItem();
-        leds[i]->setBrush(TEXT_COLOR_MAIN);//White
+        leds[i]->setBrush(QColor(255, 255, 255, 128));//White
     }
     //filledRect = new QGraphicsRectItem();
     //filledRect->setBrush(QColor(139, 0, 0, 255)); //Dark red
@@ -52,21 +52,20 @@ void RightBar::fillRects(int ledstate) {
     {
         
         if (i < ledstate) {
-            leds[i] = new QGraphicsRectItem();
             if (i < 3)//rouge
             {
-                leds[i]->setBrush(QColor(139, 0, 0, 255));//Red
+                leds[i]->setBrush(QColor(255, 0, 0, 200));//Red
             }
             else if (i > 6)
             {
-                leds[i]->setBrush(QColor(0, 100, 0, 255)); //Green
+                leds[i]->setBrush(QColor(0, 255, 0, 128)); //Green
             }
             else {
-                leds[i]->setBrush(QColor(128, 128, 0, 255)); //Yellow
+                leds[i]->setBrush(QColor(255, 255, 0, 128)); //Yellow
             }
         }
         else {
-            leds[i]->setBrush(TEXT_COLOR_MAIN);//White
+            leds[i]->setBrush(QColor(255, 255, 255, 128));//White
         }
     }
     //filledRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, BARGRAPH_WIDTH, (BARGRAPH_HEIGHT / 10) * ledstate);
@@ -79,7 +78,7 @@ void RightBar::recolorFullBargraph() {
 void RightBar::recolorActivePowerup() {
     for (int i = 0; i < 10; i++)
     {
-        leds[i]->setBrush(QColor(0, 0, 205, 255)); //Dark Blue
+        leds[i]->setBrush(QColor(0, 0, 255, 128)); //Dark Blue
     }
     //filledRect->setBrush(QColor(0, 0, 205, 255)); //Dark Blue
 }
@@ -92,7 +91,7 @@ void RightBar::resetBargraph() {
 void RightBar::setMultiplier(const int currentMultiplier, bool isPowerup, bool isDivineIntervention) {
     QString multiplierDesc = "";
     if (isPowerup && isDivineIntervention) {
-        multiplierDesc = "POWERUP ET INTERVENTION DIVINE !!!";
+        multiplierDesc = "POWERUP ET \nINTERVENTION DIVINE !!!";
     }
     else if (isPowerup)
     {
@@ -100,9 +99,11 @@ void RightBar::setMultiplier(const int currentMultiplier, bool isPowerup, bool i
     }
     else if (isDivineIntervention)
     {
-        multiplierDesc = "INTERVENTION DIVINE !!!";
+        multiplierDesc = "INTERVENTION\nDIVINE !!!";
     }
-    this->multiplier->setPlainText("x" + QString::number(currentMultiplier) + " : " + multiplierDesc);
+    if (this != NULL) {
+        this->multiplier->setPlainText("x" + QString::number(currentMultiplier) + " : " + multiplierDesc);
+    }
 }
 
 void RightBar::place() {
@@ -119,12 +120,12 @@ void RightBar::place() {
         streak->boundingRect().height() + TEXT_MARGIN_Y);
     scene->addItem(multiplier);
 
-    backgroundRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, BARGRAPH_WIDTH, BARGRAPH_HEIGHT);
+    backgroundRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y + 140, BARGRAPH_WIDTH, BARGRAPH_HEIGHT);
     scene->addItem(backgroundRect);
     for (int i = 0; i < 10; i++)
     {
-        leds[i]->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height()
-            + TEXT_MARGIN_Y + 10 + (i * 30), LED_WIDTH, LED_HEIGHT);
+        leds[i]->setRect(xPos + 10, multiplier->pos().y() + multiplier->boundingRect().height()
+            + TEXT_MARGIN_Y + 150 + (i * 30), LED_WIDTH, LED_HEIGHT);
         scene->addItem(leds[i]);
     }
     //filledRect->setRect(xPos, multiplier->pos().y() + multiplier->boundingRect().height() + TEXT_MARGIN_Y, BARGRAPH_WIDTH, 1);

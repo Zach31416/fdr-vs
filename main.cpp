@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
   QList<QScreen*> screens = QGuiApplication::screens();
   // Create a view to put the scene inside
   QGraphicsView* view = new QGraphicsView();
+  view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   // Mount a remote to this view
   Remote* remote = new Remote(view);
   // Lock its dimensions (using the first screen from the list)
