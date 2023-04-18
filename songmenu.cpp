@@ -24,7 +24,7 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   title = new QGraphicsTextItem();
   title->setPlainText("Choix de la chanson:");
   title->setDefaultTextColor(TEXT_COLOR_MAIN);
-  title->setFont(QFont("Arial",42));
+  title->setFont(QFont("Glaive",42));
   title->setPos(TEXT_SIDE_PADDING,TEXT_TOP_PADDING);
   this->addItem(title);
 
@@ -32,7 +32,7 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   desc = new QGraphicsTextItem();
   desc->setPlainText("This is a test");
   desc->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  desc->setFont(QFont("Arial",24));
+  desc->setFont(QFont("Glaive",24));
   desc->setPos( this->sceneRect().width()/2+TEXT_SIDE_PADDING,
                 title->pos().y()+title->boundingRect().height());
   this->addItem(desc);
@@ -45,12 +45,12 @@ SongMenu::SongMenu(QGraphicsView* view, QObject* parent) {
   }
   // Add the back button to the end of the list
   songTextList[SONG_COUNT] = new QGraphicsTextItem();
-  songTextList[SONG_COUNT]->setPlainText("Retour en arrière");
+  songTextList[SONG_COUNT]->setPlainText("Retour en arriere");
   // Y position where the list starts:
   int yStartList = title->pos().y()+title->boundingRect().height()+TEXT_MARGIN_Y;
   // Configure the elements of the list
   for (int i=0;i<=SONG_COUNT;i++){
-    songTextList[i]->setFont(QFont("Arial",24));
+    songTextList[i]->setFont(QFont("Glaive",24));
     songTextList[i]->setPos(TEXT_SIDE_PADDING,
       yStartList+(i*(songTextList[i]->boundingRect().height()+TEXT_MARGIN_Y)));
     this->addItem(songTextList[i]);
@@ -86,7 +86,7 @@ void SongMenu::draw(){
   }
   // Print the description for the selected song (exception for back-button)
   if (currentSong < SONG_COUNT){
-    QString descStr = "Titre: %1\nArtiste: %2\nAlbum: %3\nAnnée: %4\nCharter: %5";
+    QString descStr = "Titre: %1\nArtiste: %2\nAlbum: %3\nAnnee: %4\nCharter: %5";
     descStr = descStr.arg(
                 songList[currentSong]->getTitle(),
                 songList[currentSong]->getArtist(),

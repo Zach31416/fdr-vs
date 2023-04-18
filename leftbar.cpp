@@ -29,16 +29,16 @@ LeftBar::LeftBar(QGraphicsScene* scene) {
         QFont("Glaive Regular",36)
     // QFont("/home/master/Workspace/fdr/songs/glaive.ttf",36)
   );
-  difficulty->setFont(QFont("Arial",18));
+  difficulty->setFont(QFont("Glaive",18));
   album->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  album->setFont(QFont("Arial", 24));
+  album->setFont(QFont("Glaive", 24));
   author->setDefaultTextColor(TEXT_COLOR_DISCRETE);
-  author->setFont(QFont("Arial", 14));
+  author->setFont(QFont("Glaive", 14));
   year->setDefaultTextColor(TEXT_COLOR_DISCRETE);
-  year->setFont(QFont("Arial", 14));
+  year->setFont(QFont("Glaive", 14));
   duration->setDefaultTextColor(TEXT_COLOR_SECONDARY);
   charter->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  difficulty->setFont(QFont("Arial", 24));
+  difficulty->setFont(QFont("Glaive", 24));
   difficulty->setDefaultTextColor(TEXT_COLOR_SECONDARY);
   // Used for iterating positionning and adding to scene:
   QGraphicsTextItem* elements[] ={

@@ -22,12 +22,12 @@ MainMenu::MainMenu(QGraphicsView* view, QObject* parent) {
   setBgGradient(this);
   // Options for the menu:
   QString elements[] = {
-    "Jouer", "Règlements", "Infos", "Quitter"
+    "Jouer", "Reglements", "Infos", "Quitter"
   };
   for (int i=0;i<4;i++ ){
     boutons[i] = new QGraphicsTextItem();
     boutons[i]->setPlainText(elements[i]);
-    boutons[i]->setFont(QFont("Arial",42));
+    boutons[i]->setFont(QFont("Glaive",42));
     boutons[i]->setPos(
           TEXT_SIDE_PADDING, // Position X
           TEXT_TOP_PADDING+((boutons[i]->boundingRect().height()+TEXT_MARGIN_Y)*i)  // Position y

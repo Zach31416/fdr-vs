@@ -21,15 +21,15 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
   setBgGradient(this);
   // Setup title
   title = new QGraphicsTextItem();
-  title->setPlainText("Résultats pour\n"+song->getTitle());
+  title->setPlainText("Resultats pour\n"+song->getTitle());
   title->setDefaultTextColor(TEXT_COLOR_MAIN);
-  title->setFont(QFont("Arial",54));
+  title->setFont(QFont("Glaive",54));
   title->setPos(TEXT_SIDE_PADDING,TEXT_TOP_PADDING);
   this->addItem(title);
   // Setup Description:
   score = new QGraphicsTextItem();
   score->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  score->setFont(QFont("Arial",24));
+  score->setFont(QFont("Glaive",24));
   score->setPos(TEXT_SIDE_PADDING,
       title->pos().y()+ title->boundingRect().height()+TEXT_MARGIN_Y);
   QString descStr = R"(
@@ -41,7 +41,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
 
   percentage = new QGraphicsTextItem();
   percentage->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  percentage->setFont(QFont("Arial", 24));
+  percentage->setFont(QFont("Glaive", 24));
   percentage->setPos(TEXT_SIDE_PADDING,
       score->pos().y() + score->boundingRect().height() + TEXT_MARGIN_Y);
   //descStr = descStr.arg(song->getScore());
@@ -50,7 +50,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
 
   nbNotesReussies = new QGraphicsTextItem();
   nbNotesReussies->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  nbNotesReussies->setFont(QFont("Arial", 24));
+  nbNotesReussies->setFont(QFont("Glaive", 24));
   nbNotesReussies->setPos(TEXT_SIDE_PADDING,
       percentage->pos().y() + percentage->boundingRect().height() + TEXT_MARGIN_Y);
   //descStr = descStr.arg(song->getScore());
@@ -59,7 +59,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
 
   maxStreak = new QGraphicsTextItem();
   maxStreak->setDefaultTextColor(TEXT_COLOR_SECONDARY);
-  maxStreak->setFont(QFont("Arial", 24));
+  maxStreak->setFont(QFont("Glaive", 24));
   maxStreak->setPos(TEXT_SIDE_PADDING,
       nbNotesReussies->pos().y() + nbNotesReussies->boundingRect().height() + TEXT_MARGIN_Y);
   //descStr = descStr.arg(song->getScore());
@@ -70,7 +70,7 @@ EndMenu::EndMenu(QGraphicsView* view, Song* song, QObject* parent) {
   backButton = new QGraphicsTextItem();
   backButton->setPlainText("Retour au menu principal");
   backButton->setDefaultTextColor(TEXT_COLOR_MENU_SELECTED);
-  backButton->setFont(QFont("Arial",32));
+  backButton->setFont(QFont("Glaive",32));
   backButton->setPos(TEXT_SIDE_PADDING,
       maxStreak->pos().y()+ maxStreak->boundingRect().height()+TEXT_MARGIN_Y);
   this->addItem(backButton);

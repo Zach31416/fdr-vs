@@ -38,9 +38,9 @@ ET DE GARDER LE ROCK VIVANT!
                          )";
 
   title = new QGraphicsTextItem();
-  title->setPlainText("Règles du jeu:");
+  title->setPlainText("Regles du jeu:");
   title->setDefaultTextColor(TEXT_COLOR_MAIN);
-  title->setFont(QFont("Arial",64));
+  title->setFont(QFont("Glaive",64));
 
   paragraph = new QGraphicsTextItem();
   paragraph->setPlainText(rulesText);
@@ -48,9 +48,9 @@ ET DE GARDER LE ROCK VIVANT!
   paragraph->setFont(QFont("Arial",18));
 
   backButton = new QGraphicsTextItem();
-  backButton->setPlainText("Retour en arrière");
+  backButton->setPlainText("Retour en arriere");
   backButton->setDefaultTextColor(TEXT_COLOR_MENU);
-  backButton->setFont(QFont("Arial",24));
+  backButton->setFont(QFont("Glaive",24));
 
   title->setPos(TEXT_SIDE_PADDING,TEXT_TOP_PADDING);
   paragraph->setPos(TEXT_SIDE_PADDING,

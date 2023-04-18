@@ -15,13 +15,13 @@ RightBar::RightBar(GameScene* scene) {
     qDebug() << scene->getFret(4)->scenePos();
     score = new QGraphicsTextItem("Score: 0");
     score->setDefaultTextColor(TEXT_COLOR_MAIN);
-    score->setFont(QFont("Arial", 32));
+    score->setFont(QFont("Glaive", 32));
     streak = new QGraphicsTextItem("Notes de suite: 0");
     streak->setDefaultTextColor(TEXT_COLOR_MAIN);
-    streak->setFont(QFont("Arial", 32));
+    streak->setFont(QFont("Glaive", 32));
     multiplier = new QGraphicsTextItem("x1");
     multiplier->setDefaultTextColor(TEXT_COLOR_MAIN);
-    multiplier->setFont(QFont("Arial", 32));
+    multiplier->setFont(QFont("Glaive", 32));
 
     backgroundRect = new QGraphicsRectItem();
     backgroundRect->setBrush(QColor(255, 255, 255, 128));//White

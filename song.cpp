@@ -315,6 +315,7 @@ void Song::play(int difficulty){
   activePowerup = false;
   activeDivineIntervention = false;
   activeDivineCheck = true;
+  isSongOver = false;
   // for (int i=0;i<5;i++) scoreTab[i] =0;
   // Initialise a timer that checks muons every second
   muonClock = new QTimer(this);
@@ -351,35 +352,40 @@ void Song::spawnHandler() {
 }
 
 void Song::divineStart(){
-  currentMultiplier *= STREAK_MULT_VALUE;
-  activeDivineIntervention = true;
-  activeDivineCheck = false; // Stop checking for muons until cooldown end
-  // Start a 10s timer that will end the divine intervention
-  scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
-  QTimer* divineTimer = new QTimer();
-  divineTimer->setInterval(STREAK_MULT_DURATION);
-  divineTimer->setSingleShot(true);
-  connect(divineTimer, &QTimer::timeout, this, [=]() {
-      divineEnd(divineTimer);
-      });
-  divineTimer->start();
+    if (!isSongOver)
+    {
+        currentMultiplier *= STREAK_MULT_VALUE;
+        activeDivineIntervention = true;
+        activeDivineCheck = false; // Stop checking for muons until cooldown end
+        // Start a 10s timer that will end the divine intervention
+        scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
+        QTimer* divineTimer = new QTimer();
+        divineTimer->setInterval(STREAK_MULT_DURATION);
+        divineTimer->setSingleShot(true);
+        connect(divineTimer, &QTimer::timeout, this, [=]() {
+            divineEnd(divineTimer);
+            });
+        divineTimer->start();
+    }
 }
 
 void Song::divineEnd(QTimer* clock){
-  // delete the divine intervention clock to prevent memory leaks
-  delete clock;
-  // Reset the divine intervention
-  activeDivineIntervention = false;
-  currentMultiplier /= STREAK_MULT_VALUE;
-  scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
-  // Start the cooldown clock
-  QTimer* cooldownClock = new QTimer();
-  cooldownClock->setInterval(3000);
-  cooldownClock->setSingleShot(true);
-  connect(cooldownClock, &QTimer::timeout, this, [=]() {
-      divineCooldownEnd(cooldownClock);
-      });
-  cooldownClock->start();
+    if (!isSongOver) {
+        // delete the divine intervention clock to prevent memory leaks
+        delete clock;
+        // Reset the divine intervention
+        activeDivineIntervention = false;
+        currentMultiplier /= STREAK_MULT_VALUE;
+        scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
+        // Start the cooldown clock
+        QTimer* cooldownClock = new QTimer();
+        cooldownClock->setInterval(3000);
+        cooldownClock->setSingleShot(true);
+        connect(cooldownClock, &QTimer::timeout, this, [=]() {
+            divineCooldownEnd(cooldownClock);
+            });
+        cooldownClock->start();
+    }
 }
 
 void Song::divineCooldownEnd(QTimer* clock){
@@ -391,7 +397,7 @@ void Song::divineCooldownEnd(QTimer* clock){
 
 // Executes when a streak multiplier is activated:
 void Song::shake() {
-    if (streakReady) {
+    if (streakReady && !isSongOver) {
         activePowerup = true;
         QTimer* onStreak = new QTimer(); // Create a timer
         onStreak->setInterval(STREAK_MULT_DURATION); // set it's duration
@@ -410,15 +416,18 @@ void Song::shake() {
 
 // Executes when a streak multiplier finishes:
 void Song::shakeEnd(QTimer* clock) {
-    currentMultiplier /= STREAK_MULT_VALUE; // Revert the multiplier value
-    // set the streakMeter int of the bargraph to zero
-    // TODO: set the rectangle size to zero
-    // TODO: reset the rectangle color to red
-    scene->getRightBar()->resetBargraph();
-    activePowerup = false;
-    streakReady = false;
-    scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
-    delete clock; // Delete the timer which is no longer needed
+    if (!isSongOver)
+    {
+        currentMultiplier /= STREAK_MULT_VALUE; // Revert the multiplier value
+        // set the streakMeter int of the bargraph to zero
+        // TODO: set the rectangle size to zero
+        // TODO: reset the rectangle color to red
+        scene->getRightBar()->resetBargraph();
+        activePowerup = false;
+        streakReady = false;
+        scene->getRightBar()->setMultiplier(currentMultiplier, activePowerup, activeDivineIntervention);
+        delete clock; // Delete the timer which is no longer needed
+    }
 }
 
 // Updates the scoring system for each note
@@ -651,6 +660,7 @@ int Song::getCorrectlyPlayedNotes() {
 void Song::handleMediaStatusChanged(QMediaPlayer::MediaStatus status) {
     if (status == QMediaPlayer::EndOfMedia) {
         qDebug() << "Reached end of song";
+        isSongOver = true;
         QGraphicsView* view = scene->getView();
         view->setScene(new EndMenu(view, this));
         delete scene;

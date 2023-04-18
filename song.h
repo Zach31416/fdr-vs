@@ -55,6 +55,7 @@ class Song:public QObject {
     bool activePowerup;
     bool activeDivineIntervention; // resets once the powerup is over
     bool activeDivineCheck; // Resets after the cooldown
+    bool isSongOver;
     std::vector<Chord>* currentDifficulty;
     void longCheck(QTimer* clock, uint chordIndex);
     void spawnHandler();

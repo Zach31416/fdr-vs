@@ -22,9 +22,9 @@ DifficultyMenu::DifficultyMenu(QGraphicsView* view, Song* song, QObject* parent)
   setBgGradient(this);
   // Create the title
   title = new QGraphicsTextItem();
-  title->setPlainText("Choix de la difficulté:");
+  title->setPlainText("Choix de la difficulte:");
   title->setDefaultTextColor(TEXT_COLOR_MAIN);
-  title->setFont(QFont("Arial",56));
+  title->setFont(QFont("Glaive",56));
   title->setPos(TEXT_SIDE_PADDING,TEXT_TOP_PADDING);
   this->addItem(title);
   // Add the difficulties to the choices list
@@ -34,10 +34,10 @@ DifficultyMenu::DifficultyMenu(QGraphicsView* view, Song* song, QObject* parent)
   }
   // Add the back button:
   boutons[4] = new QGraphicsTextItem();
-  boutons[4]->setPlainText("Retour en arrière");
+  boutons[4]->setPlainText("Retour en arriere");
   // Configure the list appearance (and add them to the scene):
   for (int i=0;i<5;i++){
-    boutons[i]->setFont(QFont("Arial",32));
+    boutons[i]->setFont(QFont("Glaive",32));
     boutons[i]->setPos(TEXT_SIDE_PADDING,
       title->pos().y()+title->boundingRect().height()+TEXT_MARGIN_Y+
       (i* (TEXT_MARGIN_Y+boutons[i]->boundingRect().height())) );
