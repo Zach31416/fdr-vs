@@ -8,7 +8,7 @@
 
 #include "qscreen.h"
 #include "mainmenu.h"
-#include "remote.h"
+// #include "remote.h"
 #include "gamescene.h"
 
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
   view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   // Mount a remote to this view
-  Remote* remote = new Remote(view);
+  // Remote* remote = new Remote(view);
   // Lock its dimensions (using the first screen from the list)
   view->setFixedSize(screens.first()->availableSize());
   // Make the game fullscreen

@@ -31,7 +31,7 @@ Song::~Song() {
 
 void Song::parseInfo() {
     std::string stdAudio = chartfile.toStdString();
-    std::size_t lastSlash = stdAudio.find_last_of("\\");
+    std::size_t lastSlash = stdAudio.find_last_of("/");
     stdAudio = stdAudio.substr(0, lastSlash + 1) + "song.wav";
     audiofile = QString::fromStdString(stdAudio);
     mediaPlayer = new QMediaPlayer();
@@ -322,7 +322,7 @@ void Song::play(int difficulty){
   muonClock->setInterval(1000);
   connect(muonClock, &QTimer::timeout, this, [=]() {
       if (activeDivineCheck) {
-          if ((muonNb % 25) == 0) {
+          if ((muonNb % 25) == 1) {
               divineStart();
           }
       }

@@ -19,7 +19,6 @@ SOURCES += \
     leftbar.cpp \
     mainmenu.cpp \
     note.cpp \
-    remote.cpp \
     rightbar.cpp \
     rulesmenu.cpp \
     song.cpp \
@@ -27,6 +26,7 @@ SOURCES += \
     timestamp.cpp \
     ui.cpp \
     main.cpp
+    # remote.cpp \
 
 HEADERS += \
     chord.h \
@@ -39,13 +39,13 @@ HEADERS += \
     leftbar.h \
     mainmenu.h \
     note.h \
-    remote.h \
     rightbar.h \
     rulesmenu.h \
     song.h \
     songmenu.h \
     timestamp.h \
     ui.h
+    # remote.h \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
