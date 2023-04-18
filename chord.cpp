@@ -8,6 +8,9 @@
 #include "ui.h"
 #include "gamescene.h"
 
+// Consctructors/Destructors & Operators {{{
+
+// Used when all notes of a chord are known
 Chord::Chord(int start, int duration, bool toPlay[5]):
   duration(duration), start(start), end(start+duration),
   rushStart(start-TOLERANCE_RUSHING),
@@ -28,6 +31,7 @@ Chord::Chord(int start, int duration, bool toPlay[5]):
   }
 }
 
+// Used when constructing chord from parsing a chartfile (line by line)
 Chord::Chord(int fret, int start, int end):
   duration((end==0)?0:end-start),start(start),end(end),
   rushStart(start-TOLERANCE_RUSHING),
@@ -41,17 +45,59 @@ Chord::Chord(int fret, int start, int end):
   }
 }
 
+// Copy constructor
 Chord::Chord(const Chord& chord):
   duration(chord.duration),start(chord.start),end(chord.end),
   rushStart(chord.rushStart),dragStart(chord.dragStart),
   rushRelease(chord.rushRelease),dragRelease(chord.dragRelease),
   spawnTime(chord.spawnTime),noteNB(chord.noteNB){
   for (int i=0;i<5;i++){
+    // Notes are pointers so that copying them takes little time (no deep copy)
     notes[i] = chord.notes[i];
   }
 }
 
-Chord::~Chord(){}
+// Destructor
+// Notes are deleted when they reach offscreen (in the despawn method).
+// There is therefore a possibility that notes are deleted twice if not handled.
+Chord::~Chord(){
+  for (int i=0;i<noteNB;i++){
+    if (notes[i]!=NULL) delete notes[i];
+  }
+}
+
+// As chords are stored in a vector, the assignment operator is necessary
+Chord& Chord::operator=(const Chord& other) {
+    // Check for self-assignment
+    if (this == &other) {
+        return *this;
+    }
+    // Copy the non-constant member variables
+    start = other.start;
+    end = other.end;
+    duration = other.duration;
+    rushStart = other.rushStart;
+    dragStart = other.dragStart;
+    rushRelease = other.rushRelease;
+    dragRelease = other.dragRelease;
+    spawnTime = other.spawnTime;
+    noteNB = other.noteNB;
+    // Copy the notes array (using the Note copy constructor)
+    // bool toPlay[5]{0};
+    for (int i = 0;i<other.noteNB;i++) {
+      notes[i] = new Note(other.notes[i]->getFret(),msToPx(duration));
+      // toPlay[other.notes[i]->getFret()]=true;
+    }
+    // for (int i=0; i<5; i++){
+      // notes[i] = (toPlay[i])? new Note(i,msToPx(duration)):NULL;
+    // }
+    // Return a reference to the updated object
+    return *this;
+}
+
+// }}}
+
+// Methods {{{
 
 // Spawn takes a chord and spawns it slightly above the user's screen.
 // Since every note moves in the exact same way, their animations are run
@@ -100,6 +146,9 @@ void Chord::spawn(GameScene* scene) const{
   groupAnimation->start();
 }
 
+// Since the spawn time of the note depends on the dimensions of the scene
+// (notes traverse the scene at a constant rate). They are defined by the song
+// starts (as the scene is surely mounted to a view at that time).
 void Chord::setSpawnTime(int ms){
   spawnTime=ms;
 }
@@ -112,6 +161,10 @@ void Chord::despawn() const{
   }
 }
 
+// Merge takes a chord and merges it with the current chord.
+// This is called by the song's consolidate method so that chords with the same
+// start time & duration are merged into one, therefore allowing the score engine
+// to handle multi-note chords differently than single note chords.
 void Chord::merge(Chord* chord){
   for (int i=0;i<5;i++){
     if (chord->notes[i] != NULL){
@@ -120,6 +173,8 @@ void Chord::merge(Chord* chord){
   }
 }
 
+// Useful for debugging prints general info about the chord
+// TODO: make this a << operator overload.
 void Chord::print(){
   std::string states = "{_____}";
   for (int i=0;i<noteNB;i++){
@@ -133,20 +188,28 @@ void Chord::print(){
            << " Spawn time:" << spawnTime;
 }
 
+// }}}
+
+// Getters {{{
+
 int Chord::getStart(){
   return start;
 }
 
-int Chord::getRushStart(){
-  return rushStart;
+int Chord::getEnd(){
+  return end;
 }
 
 int Chord::getDuration(){
   return duration;
 }
 
-int Chord::getEnd(){
-  return end;
+int Chord::getRushStart(){
+  return rushStart;
+}
+
+int Chord::getNbNotes() {
+    return noteNB;
 }
 
 int Chord::getSpawnTime() const{
@@ -161,35 +224,4 @@ std::array<bool,5> Chord::getNotes(){
   return noteStates;
 }
 
-Chord& Chord::operator=(const Chord& other) {
-    // Check for self-assignment
-    if (this == &other) {
-        return *this;
-    }
-    // Copy the non-constant member variables
-    start = other.start;
-    end = other.end;
-    duration = other.duration;
-    rushStart = other.rushStart;
-    dragStart = other.dragStart;
-    rushRelease = other.rushRelease;
-    dragRelease = other.dragRelease;
-    spawnTime = other.spawnTime;
-    noteNB = other.noteNB;
-    // Copy the notes array (using the Note copy constructor)
-    // bool toPlay[5]{0};
-    for (int i = 0;i<other.noteNB;i++) {
-      notes[i] = new Note(other.notes[i]->getFret(),msToPx(duration));
-      // toPlay[other.notes[i]->getFret()]=true;
-    }
-    // for (int i=0; i<5; i++){
-      // notes[i] = (toPlay[i])? new Note(i,msToPx(duration)):NULL;
-    // }
-    // Return a reference to the updated object
-    return *this;
-}
-
-int Chord::getNbNotes()
-{
-    return noteNB;
-}
+// }}}

@@ -20,18 +20,21 @@ class Chord:public QObject {
     Chord(const Chord& chord);            // Copy constructor
     Chord& operator=(const Chord& other);
     ~Chord();
+    // Methods:
     void spawn(GameScene* scene) const; // Draw the notes and launch them
     void merge(Chord* chord);
     void print();
-    int getRushStart();
+    // Getters:
     int getStart();
     int getEnd();
     int getDuration();
-    int getSpawnTime() const;
-    void setSpawnTime(int ms);
-    std::array<bool,5> getNotes();
-    Note* notes[5];  // Simultaneous notes in one chord
+    int getRushStart();
     int getNbNotes();
+    int getSpawnTime() const;
+    std::array<bool,5> getNotes(); // the 5 GH notes (true if note is present)
+    // Setters:
+    void setSpawnTime(int ms); // Calculated by the song
+    Note* notes[5];  // Simultaneous notes in one chord
   public slots:
     void despawn() const; // Delete the chord once offscreen
   private:
